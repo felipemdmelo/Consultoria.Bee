@@ -1,7 +1,7 @@
 # Consultoria.Bee
 Um projeto criado para auxiliar a consultoria para Bee.
 
-Padrão arquiterual seguido conforme sugerido na documentação:
+Padrão arquitetural seguido conforme sugerido na documentação: Clean Architecture
 - https://docs.microsoft.com/pt-br/dotnet/standard/modern-web-apps-azure-architecture/common-web-application-architectures
 
 -----------------------------------------------------------
@@ -19,4 +19,5 @@ Executar os seguintes comandos na criação do projeto Data:
 TODO:
 
 - Colocar a injeção de dependência num container
-- Criar CRUD para Categoria
+- Finalzar os CRUDs de Produto e Categoria
+- Elaborar testes
