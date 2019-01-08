@@ -4,14 +4,16 @@ using Consultoria.Bee.Data.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Consultoria.Bee.Data.EF.Migrations
 {
     [DbContext(typeof(BeeContext))]
-    partial class BeeContextModelSnapshot : ModelSnapshot
+    [Migration("20190108164030_CateoriaEntidade")]
+    partial class CateoriaEntidade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

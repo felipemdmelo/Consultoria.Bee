@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Consultoria.Bee.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace Consultoria.Bee.MVC.Controllers
@@ -48,8 +49,10 @@ namespace Consultoria.Bee.MVC.Controllers
         }
 
         // GET: Produto/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            var lista = await GetCategorias();
+            ViewBag.ListOfCategorias = new SelectList(lista, "Id", "Nome");
             return View();
         }
 
@@ -60,10 +63,6 @@ namespace Consultoria.Bee.MVC.Controllers
         {
             try
             {
-                //var produto = new Produto();
-                //produto.Nome = "Testando";
-                //produto.Preco = 99;
-
                 var client = _clientFactory.CreateClient();
                 var uri = "http://localhost/Consultoria.Bee.Api/api/produto";
                 var jsonInString = JsonConvert.SerializeObject(produto);
@@ -125,5 +124,27 @@ namespace Consultoria.Bee.MVC.Controllers
                 return View();
             }
         }
+
+        #region PRIVATE METHODS
+        private async Task<IEnumerable<ProdutoCategoria>> GetCategorias()
+        {
+            IEnumerable<ProdutoCategoria> rtn = new List<ProdutoCategoria>();
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Consultoria.Bee.Api/api/ProdutoCategoria");
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("User-Agent", "HttpClientFactory-Sample");
+
+            var client = _clientFactory.CreateClient();
+
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                rtn = await response.Content
+                    .ReadAsAsync<IEnumerable<ProdutoCategoria>>();
+            }
+
+            return rtn;
+        }
+        #endregion
     }
 }

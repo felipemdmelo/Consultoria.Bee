@@ -44,9 +44,11 @@ namespace Consultoria.Bee.Api
             // Injeções de dependência..
             // Repositories..
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IProdutoCategoriaRepository, ProdutoCategoriaRepository>();
 
             // Services..
             services.AddTransient<IProdutoService, ProdutoService>();
+            services.AddTransient<IProdutoCategoriaService, ProdutoCategoriaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
